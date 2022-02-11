@@ -157,7 +157,7 @@ class Communicate(QObject):
 
 
 
-def dataSendLoop(addData_callbackFunc):
+def datasendLoop(addData_callbackFunc):
     # Setup the signal-slot mechanism.
     mySrc = Communicate()
     mySrc.data_signal.connect(addData_callbackFunc)
