@@ -62,7 +62,7 @@
       <method v="2" />
     </configuration>
     <configuration name="graph" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="structure_tester" />
+      <module name="structure_tester_project" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -124,6 +124,12 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <list>
+      <item itemvalue="Python.embeded_gui_example" />
+      <item itemvalue="Python.graph" />
+      <item itemvalue="Python.init" />
+      <item itemvalue="Python.random_examples" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Python.graph" />

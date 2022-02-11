@@ -2,10 +2,10 @@ import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
 
-
+# temporary variable, only used in testing, replace with actual graph inputs
 ps1 = np.linspace(0, 1 * np.pi, 100)
 
-# create the axis
+# create the graph plot
 fig, ax = plt.subplots()
 
 # animated=True tells matplotlib to only draw the artist when we
