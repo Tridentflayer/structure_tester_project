@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="examples">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/mcculw-master/examples.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
