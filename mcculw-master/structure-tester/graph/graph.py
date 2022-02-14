@@ -28,9 +28,9 @@ def init():
     line.set_data(xdata, ydata)
     return line,
 
-def run(data1):
+def run(data):
     # time (t) and y = data
-    t, y = data1
+    t, y = data
     # update x to be set to time
     xdata.append(t)
     # update y data to new y value
