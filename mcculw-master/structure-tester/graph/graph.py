@@ -10,16 +10,16 @@ fig, ax = plt.subplots()
 ax.grid()
 
 # creates a line with line-width two, at points x[] and y[]
+
 line, = ax.plot([], [], lw=2)
 xdata, ydata = [], []
 
 
-def data_gen():
+def datagen():
+    # creates timer on the x-axis
     for cnt in itrt.count():
         t = cnt / 10
-        yield t, np.log(np.pi*2*t)
-
-    pass
+        yield t, t
 
 # init function, clears line data and sets the line data to be x[] and y[]
 def init():
@@ -51,7 +51,7 @@ def run(data):
 
     return line,
 
-ani = animation.FuncAnimation(fig, run, data_gen, interval=1, init_func=init)
+ani = animation.FuncAnimation(fig, run, datagen, interval=1, init_func=init)
 
 # show graph, absolutely necessary
 plt.show()
