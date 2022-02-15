@@ -21,6 +21,7 @@ ydataps3 = []
 ydataps4 = []
 ydatads1 = []
 
+# generates data for the graph
 def datagen():
     # creates timer on the x-axis
     for cnt in itrt.count():
@@ -42,7 +43,7 @@ lineps3, = ax.plot(t, [], lw=2)
 lineps4, = ax.plot(t, [], lw=2)
 lineds1, = ax.plot(t, [], lw=2)
 
-# init function, clears line data and sets the line data to be x[] and y[]
+# init function, clears line data and sets the line data to be t and y[]
 def init():
     # clear data
     del xdata[:]
@@ -64,6 +65,7 @@ def init():
 # return updated values
     return lineps1, lineps2, lineps3, lineps4, lineds1
 
+# updates values for data
 def run(data):
     # time (t) and y = data
     t, yps1, yps2, yps3, yps4, yds1 = data
@@ -81,10 +83,11 @@ def run(data):
     xmin, xmax = ax.get_xlim()
     ymin, ymax =ax.get_ylim()
 
+    # compares all y data to ensure the graph scales on the highest value
     ydata_list = [yps1, yps2, yps3, yps4, yds1]
     max_value = max(ydata_list)
 
-    # needs to be replaced
+    # y scale
     if max_value >= ymax:
         ax.set_ylim(ymin, 2*ymax)
         ax.figure.canvas.draw()
@@ -105,6 +108,7 @@ def run(data):
 # returns updated line values
     return lineps1, lineps2, lineps3, lineps4, lineds1
 
+# creates an animation function which runs all the functions in a loop
 ani = animation.FuncAnimation(fig, run, datagen, interval=1, init_func=init)
 
 # show graph, absolutely necessary
