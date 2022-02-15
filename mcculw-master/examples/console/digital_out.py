@@ -72,7 +72,7 @@ def run_example():
         ul.d_out(board_num, port.type, port_value)
 
         bit_num = 0
-        bit_value = 0
+        bit_value = 1
         print('Setting', port.type.name, 'bit', bit_num, 'to', bit_value)
 
         # Output the value to the bit
