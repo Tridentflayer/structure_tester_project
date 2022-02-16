@@ -49,7 +49,7 @@
       <recent name="C:\Users\kmzada\Documents\GitHub\structure_tester\mcculw-master\structure-tester" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.digital_out">
+  <component name="RunManager" selected="Python.dio_test">
     <configuration name="Startup Prototype" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="structure_tester_project" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -186,9 +186,9 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.dio_test" />
         <item itemvalue="Python.digital_out" />
         <item itemvalue="Python.pulse_out" />
-        <item itemvalue="Python.dio_test" />
         <item itemvalue="Python.dio_info" />
         <item itemvalue="Python.Startup Prototype" />
       </list>
