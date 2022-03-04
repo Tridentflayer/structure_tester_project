@@ -23,7 +23,7 @@ def MagSensorTest():
     if MagSensorTop != 1 or 0:
         MagSensorTopStatus = 1  # Test top sensor. If there's an invalid value, record as variable
     else:
-        MagSensorTopStatus = 1  # Otherwise, set it as good
+        MagSensorTopStatus = 0  # Otherwise, set it as good
 
     if MagSensorBottom != 1 or 0:
         MagSensorBottomStatus = 1  # Same as above, but with bottom sensor
@@ -35,9 +35,15 @@ def MagSensorTest():
     # return MagSensorData as value of the function
     return MagSensorData
 
-# print value of the function, currently = MagSensorData
+# Split MagSensorData into usable components
 MagSensorTop = (MagSensorTest()[0])
 MagSensorBottom = (MagSensorTest()[1])
 
+
+
+
+# Temp Data Readout
+print("Mag Top")
 print(MagSensorTop)
+print("Mag Bottom")
 print(MagSensorBottom)
