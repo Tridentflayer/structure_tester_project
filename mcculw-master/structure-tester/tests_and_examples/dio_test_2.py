@@ -10,3 +10,6 @@ ul.d_config_port(0, dpt.FIRSTPORTB, diod.OUT)
 
 # Output a 0 on port 8
 ul.d_bit_out(0, dpt.FIRSTPORTA, 8, 0)
+
+
+value = ul.d_bit_in(0, dpt.FIRSTPORTA, 0)
