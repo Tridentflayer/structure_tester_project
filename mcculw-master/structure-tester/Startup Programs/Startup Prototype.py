@@ -20,7 +20,7 @@ ManualLock = 1  # Create variable to toggle manual control. Lock is true by defa
 
 
 
-def magsensortest():
+def magsensortest():  # FIX THIS!!! COMPARE THE TWO SENSORS!
 
     magsensortop = ul.d_bit_in(0, Dpt.FIRSTPORTA, 0)
     magsensorbottom = ul.d_bit_in(0, Dpt.FIRSTPORTA, 1)  # Read True/False from port, set as variable
