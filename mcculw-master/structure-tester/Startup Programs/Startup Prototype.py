@@ -51,10 +51,23 @@ def pressuresensortest():
 
     return pressuresensorstatus  # Send pressuresensorstatus out of the function
 
+def distancesensortest():
+
+    distancesensor = ul.a_in(1, 1, ULRange.BIP10VOLTS)
+
+    if distancesensor < .5 or distancesensor > 2.5:  # Check if voltage is in operating range
+        distancesensorstatus = 1
+
+    else:                            # Set value accordingly
+        distancesensorstatus = 0
+
+    return distancesensorstatus    # Send distancesensorstatus out
+
 # Split data from functions into usable components
 MagSensorTop = (magsensortest()[0])
 MagSensorBottom = (magsensortest()[1])
 PressureSensorStatus = (pressuresensortest())
+DistanceSensorStatus = (distancesensortest())
 
 # Temp Data Readout
 print("Mag Top =")
@@ -63,3 +76,5 @@ print("Mag Bottom =")
 print(MagSensorBottom)
 print("Pressure Sensor =")
 print(PressureSensorStatus)
+print("Distance Sensor =")
+print(DistanceSensorStatus)
