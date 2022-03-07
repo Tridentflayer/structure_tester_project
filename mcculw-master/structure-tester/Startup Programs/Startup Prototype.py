@@ -1,49 +1,65 @@
+
 from mcculw import ul
-from mcculw.enums import DigitalIODirection as Diod  # Import interfacing libraries
-from mcculw.device_info import DaqDeviceInfo as Ddi
+from mcculw.enums import DigitalIODirection as Diod
 from mcculw.enums import DigitalPortType as Dpt
+from mcculw.enums import ULRange
 # Import interfacing libraries
 
-# Configure the A set of ports (0-7) as inputs
+# Configure the A set of ports on DIO Board (0-7) as inputs
 ul.d_config_port(0, Dpt.FIRSTPORTA, Diod.IN)
 
-# Configure the B set of ports (8-15) as outputs
+# Configure the B set of ports on DIO Board (8-15) as outputs
 ul.d_config_port(0, Dpt.FIRSTPORTB, Diod.OUT)
+
+# Configure DIO Ports on A/D Converter. Set as Outputs
+ul.d_config_port(1, Dpt.AUXPORT, Diod.OUT)
 
 ManualLock = 1  # Create variable to toggle manual control. Lock is true by default
 
 # Port numbers are completely random right now. Will need to change ports to match actual wiring.
 
-# Define Magnetic sensors
-MagSensorTop = ul.d_bit_in(0, Dpt.FIRSTPORTA, 0)
-MagSensorBottom = ul.d_bit_in(0, Dpt.FIRSTPORTA, 1)  # Read True/False from port, set as variable
 
-def MagSensorTest():
 
-    if MagSensorTop != 1 or 0:
-        MagSensorTopStatus = 1  # Test top sensor. If there's an invalid value, record as variable
+def magsensortest():
+
+    magsensortop = ul.d_bit_in(0, Dpt.FIRSTPORTA, 0)
+    magsensorbottom = ul.d_bit_in(0, Dpt.FIRSTPORTA, 1)  # Read True/False from port, set as variable
+
+    if magsensortop != 1 or 0:
+        magsensortopstatus = 1  # Test top sensor. If there's an invalid value, record as variable
     else:
-        MagSensorTopStatus = 0  # Otherwise, set it as good
-
-    if MagSensorBottom != 1 or 0:
-        MagSensorBottomStatus = 1  # Same as above, but with bottom sensor
+        magsensortopstatus = 0  # Otherwise, set it as good
+    if magsensorbottom != 1 or 0:
+        magsensorbottomstatus = 1  # Same as above, but with bottom sensor
     else:
-        MagSensorBottomStatus = 0
+        magsensorbottomstatus = 0
 
-    MagSensorData = MagSensorTopStatus, MagSensorBottomStatus  # Create variable for extracting data
+    magsensordata = magsensortopstatus, magsensorbottomstatus  # Create variable for extracting data
 
     # return MagSensorData as value of the function
-    return MagSensorData
+    return magsensordata
 
-# Split MagSensorData into usable components
-MagSensorTop = (MagSensorTest()[0])
-MagSensorBottom = (MagSensorTest()[1])
+def pressuresensortest():
 
+    pressuresensor = ul.a_in(1, 0, ULRange.BIP10VOLTS)  # Read pin to get analog value.
 
+    if pressuresensor == 2048:       # If the sensor reads zero volts, there is likely an error. Set to error state.
+        pressuresensorstatus = 1
 
+    else:
+        pressuresensorstatus = 0    # Otherwise, it's good.
+
+    return pressuresensorstatus  # Send pressuresensorstatus out of the function
+
+# Split data from functions into usable components
+MagSensorTop = (magsensortest()[0])
+MagSensorBottom = (magsensortest()[1])
+PressureSensorStatus = (pressuresensortest())
 
 # Temp Data Readout
-print("Mag Top")
+print("Mag Top =")
 print(MagSensorTop)
-print("Mag Bottom")
+print("Mag Bottom =")
 print(MagSensorBottom)
+print("Pressure Sensor =")
+print(PressureSensorStatus)
