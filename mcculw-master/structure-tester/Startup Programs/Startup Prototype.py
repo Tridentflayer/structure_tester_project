@@ -20,24 +20,23 @@ ManualLock = 1  # Create variable to toggle manual control. Lock is true by defa
 
 
 
-def magsensortest():  # FIX THIS!!! COMPARE THE TWO SENSORS!
+def magsensortest():
 
     magsensortop = ul.d_bit_in(0, Dpt.FIRSTPORTA, 0)
     magsensorbottom = ul.d_bit_in(0, Dpt.FIRSTPORTA, 1)  # Read True/False from port, set as variable
 
-    if magsensortop != 1 or 0:
-        magsensortopstatus = 1  # Test top sensor. If there's an invalid value, record as variable
-    else:
-        magsensortopstatus = 0  # Otherwise, set it as good
-    if magsensorbottom != 1 or 0:
-        magsensorbottomstatus = 1  # Same as above, but with bottom sensor
-    else:
-        magsensorbottomstatus = 0
+    if magsensortop == magsensorbottom:
+        magsensorstatus = 1  # When the cylinder is at the bottom, and the sensors are equal, there must be an error
 
-    magsensordata = magsensortopstatus, magsensorbottomstatus  # Create variable for extracting data
+    elif magsensortop != magsensorbottom:
+        magsensorstatus = 0  # Otherwise, set it as good
+
+    else:
+        magsensorstatus = 1   # If anything else happens set an error
+
 
     # return MagSensorData as value of the function
-    return magsensordata
+    return magsensorstatus
 
 def pressuresensortest():
 
@@ -64,16 +63,14 @@ def distancesensortest():
     return distancesensorstatus    # Send distancesensorstatus out
 
 # Split data from functions into usable components
-MagSensorTop = (magsensortest()[0])
-MagSensorBottom = (magsensortest()[1])
+MagSensorStatus = (magsensortest())
 PressureSensorStatus = (pressuresensortest())
 DistanceSensorStatus = (distancesensortest())
 
 # Temp Data Readout
-print("Mag Top =")
-print(MagSensorTop)
-print("Mag Bottom =")
-print(MagSensorBottom)
+
+print("Mag Sensors =")
+print(MagSensorStatus)
 print("Pressure Sensor =")
 print(PressureSensorStatus)
 print("Distance Sensor =")
