@@ -3,6 +3,7 @@ from mcculw import ul
 from mcculw.enums import DigitalIODirection as Diod
 from mcculw.enums import DigitalPortType as Dpt
 from mcculw.enums import ULRange
+import time
 # Import interfacing libraries
 
 # Configure the A set of ports on DIO Board (0-7) as inputs
@@ -17,6 +18,27 @@ ul.d_config_port(1, Dpt.AUXPORT, Diod.OUT)
 ManualLock = 1  # Create variable to toggle manual control. Lock is true by default
 
 # Port numbers are completely random right now. Will need to change ports to match actual wiring.
+
+def cylinderbleed():
+
+    ventcontroller = 2
+
+    while ventcontroller == 1:
+        ul.d_out(0, Dpt.FIRSTPORTB, 8)
+        ul.d_out(0, Dpt.FIRSTPORTB, 9)
+
+
+    while ventcontroller > 1:
+        ul.d_out(0, Dpt.FIRSTPORTB, 8)
+        ul.d_out(0, Dpt.FIRSTPORTB, 9)
+        time.sleep(1)
+        ventcontroller = ventcontroller - 1
+        return ventcontroller
+
+
+
+
+
 
 
 
@@ -75,3 +97,5 @@ print("Pressure Sensor =")
 print(PressureSensorStatus)
 print("Distance Sensor =")
 print(DistanceSensorStatus)
+while 1 == 1:
+    print(cylinderbleed())
