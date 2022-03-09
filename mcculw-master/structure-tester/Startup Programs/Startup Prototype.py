@@ -83,7 +83,6 @@ PressureSensorStatus = (pressuresensortest())
 DistanceSensorStatus = (distancesensortest())
 CylinderBleedStatus = (cylinderbleed())
 LightBarStatus = (lightbarcheck())
-# Temp Data Readout
 
 if MagSensorStatus == 1 or PressureSensorStatus == 1 or DistanceSensorStatus == 1 or CylinderBleedStatus != 1 or LightBarStatus == 1:
     ErrorState = 1  # Check for error state
