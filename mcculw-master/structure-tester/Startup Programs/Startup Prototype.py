@@ -65,7 +65,7 @@ def distancesensortest():
 
     distancesensor = ul.a_in(1, 1, ULRange.BIP10VOLTS)
 
-    if distancesensor < .5 or distancesensor > 2.5:  # Check if voltage is in operating range
+    if distancesensor < 205 or distancesensor > 3072:  # Check if voltage is in operating range
         distancesensorstatus = 1
 
     else:                            # Set value accordingly
