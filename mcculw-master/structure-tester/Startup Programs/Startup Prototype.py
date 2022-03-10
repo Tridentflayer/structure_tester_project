@@ -89,6 +89,8 @@ if MagSensorStatus == 1 or PressureSensorStatus == 1 or DistanceSensorStatus == 
 else:
     ErrorState = 0
 
+# data printout time :)
+
 if CylinderBleedStatus == 1:
     print("Cylinder Bleed Successful!")
 else:
