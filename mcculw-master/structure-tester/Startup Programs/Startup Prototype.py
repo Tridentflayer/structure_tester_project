@@ -4,7 +4,7 @@ from mcculw.enums import DigitalIODirection as Diod
 from mcculw.enums import DigitalPortType as Dpt
 from mcculw.enums import ULRange
 import time
-# Import interfacing libraries
+# Import libraries
 
 # Configure the A set of ports on DIO Board (0-7) as inputs
 ul.d_config_port(0, Dpt.FIRSTPORTA, Diod.IN)
