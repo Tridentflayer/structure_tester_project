@@ -23,12 +23,12 @@ ManualLock = 1  # Create variable to toggle manual control. Lock is true by defa
 def cylinderbleed():    # need to fix this stupid thing :(
 
     for ventcontroller in range(5, 0, -1):  # Cycle controller 5-0
-        ul.d_bit_out(0, Dpt.FIRSTPORTB, 0, 0)
-        ul.d_bit_out(0, Dpt.FIRSTPORTB, 0, 0)      # During this, send a signal to open the vent cylinders
+        ul.d_bit_out(0, Dpt.FIRSTPORTA, 8, 0)
+        ul.d_bit_out(0, Dpt.FIRSTPORTA, 9, 0)      # During this, send a signal to open the vent cylinders
         time.sleep(.5)                  # Wait so the air has time to escape
         if ventcontroller == 1:
-            ul.d_bit_out(0, Dpt.FIRSTPORTB, 0, 1)   # At 1, power the cylinders, so they're shut, and break the loop
-            ul.d_bit_out(0, Dpt.FIRSTPORTB, 0, 1)
+            ul.d_bit_out(0, Dpt.FIRSTPORTA, 10, 1)   # At 1, power the cylinders, so they're shut, and break the loop
+            ul.d_bit_out(0, Dpt.FIRSTPORTA, 11, 1)
             break
     return ventcontroller               # Send the variable out
 
