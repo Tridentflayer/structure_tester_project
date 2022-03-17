@@ -59,6 +59,7 @@ def pressuresensortest():
 
     else:
         pressuresensorstatus = 0    # Otherwise, it's good.
+        print(pressuresensor)
 
     return pressuresensorstatus  # Send pressuresensorstatus out of the function
 
