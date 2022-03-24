@@ -2,7 +2,12 @@ import itertools as itrt
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
-
+from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
+from PyQt5.QtWidgets import QApplication, QWidget
+from PyQt5.QtWidgets import *
+from PyQt5.QtGui import *
+from PyQt5.QtCore import *
+import sys
 
 # creates figure "ax" with a grid
 fig, ax = plt.subplots()
@@ -113,3 +118,4 @@ ani = animation.FuncAnimation(fig, run, datagen, interval=1, init_func=init)
 
 # show graph, absolutely necessary
 plt.show()
+
