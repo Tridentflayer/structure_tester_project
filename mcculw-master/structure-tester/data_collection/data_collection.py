@@ -1,3 +1,4 @@
+# code ~~stolen~~ BORROWED from Article ID: 50803 on mccdaq.com
 from __future__ import absolute_import, division, print_function
 
 import time
@@ -42,3 +43,33 @@ def run_example():
         else:
             print("No devices detected")
             return
+    # **********End of Discovery************
+    # rate of data collection
+    rate = 1000
+    # datapoints per channel
+    points_per_channel = 1000
+    # lowest channel in scan
+    low_chan = 0
+    # highest channel in scan
+    high_chan = 3
+    # total scan number (used later)
+    num_chans = 4
+
+    # Defining memory buffer size
+    # As well as half that size
+    total_count = points_per_channel * num_chans
+    half_count = int(total_count / 2)
+    # The SCALEDATA option, returns volts instead of A/D counts
+    scan_options = ScanOptions.CONTINUOUS | ScanOptions.BACKGROUND
+
+    # Creates memory buffer and a pointer to find it
+    memhandle = ul.win_buf_alloc(total_count)
+    buf_data = cast(memhandle, POINTER(c_double))
+
+    # Check if the buffer was successfully allocated
+    if not memhandle:
+        print("Failed to allocate memory.")
+        return
+
+    # Sets the board to be single ended analog input
+    a_input_mode(board_num, AnalogInputMode.SINGLE_ENDED)
