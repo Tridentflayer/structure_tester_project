@@ -49,7 +49,7 @@
       <recent name="C:\Users\kmzada\Documents\GitHub\structure_tester\mcculw-master\structure-tester" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.Startup Prototype">
+  <component name="RunManager" selected="Python.data_collection_example">
     <configuration name="Startup Prototype" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="structure_tester_project" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -71,7 +71,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="digital_out" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="data_collection" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="structure_tester_project" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -79,11 +79,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/mcculw-master/examples/console" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/mcculw-master/structure-tester/data_collection" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/mcculw-master/examples/console/digital_out.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/mcculw-master/structure-tester/data_collection/data_collection.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -92,7 +92,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="dio_test" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="data_collection_example" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="structure_tester_project" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -104,28 +104,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/mcculw-master/structure-tester/tests_and_examples/dio_test.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="dio_test_2" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="structure_tester_project" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/mcculw-master/structure-tester/tests_and_examples" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/mcculw-master/structure-tester/tests_and_examples/dio_test_2.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/mcculw-master/structure-tester/tests_and_examples/data_collection_example.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -155,42 +134,49 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="pulse_out" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="Python tests for tests.TestUsb204.test_commands" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="structure_tester_project" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/mcculw-master/examples/console" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/mcculw-master/structure-tester/tests_and_examples/data_collection_examples" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/mcculw-master/examples/console/pulse_out.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;tests.TestUsb204.test_commands&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Python tests in tests.py" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+      <module name="structure_tester_project" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/mcculw-master/structure-tester/tests_and_examples/data_collection_examples" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;$PROJECT_DIR$/mcculw-master/structure-tester/tests_and_examples/data_collection_examples/tests.py&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
       <method v="2" />
     </configuration>
     <list>
       <item itemvalue="Python.graph" />
-      <item itemvalue="Python.digital_out" />
-      <item itemvalue="Python.dio_test" />
-      <item itemvalue="Python.pulse_out" />
-      <item itemvalue="Python.dio_test_2" />
       <item itemvalue="Python.Startup Prototype" />
+      <item itemvalue="Python.data_collection" />
+      <item itemvalue="Python tests.Python tests in tests.py" />
+      <item itemvalue="Python tests.Python tests for tests.TestUsb204.test_commands" />
+      <item itemvalue="Python.data_collection_example" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.data_collection_example" />
+        <item itemvalue="Python.data_collection" />
+        <item itemvalue="Python tests.Python tests for tests.TestUsb204.test_commands" />
+        <item itemvalue="Python tests.Python tests in tests.py" />
         <item itemvalue="Python.Startup Prototype" />
-        <item itemvalue="Python.dio_test_2" />
-        <item itemvalue="Python.dio_test" />
-        <item itemvalue="Python.digital_out" />
-        <item itemvalue="Python.pulse_out" />
       </list>
     </recent_temporary>
   </component>
