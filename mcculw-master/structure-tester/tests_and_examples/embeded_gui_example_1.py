@@ -1,8 +1,10 @@
+import matplotlib
 import sys
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from PyQt5.QtWidgets import QApplication, QWidget
+matplotlib.use('tkagg')
 
 class Canvas(FigureCanvas):
     def __init__(self, parent):
@@ -13,14 +15,21 @@ class Canvas(FigureCanvas):
         """ 
         Matplotlib Script
         """
-        t = np.arange(0.0, 2.0, 0.01)
-        s = 1 + np.sin(2 * np.pi * t)
+        ps1 = np.linspace(0, 1 * np.pi, 100)
+        (ln,) = self.ax.plot(ps1, np.log(ps1), animated=True)
+        bg = fig.canvas.copy_from_bbox(fig.bbox)
+        fig.canvas.draw()
+        self.ax.draw_artist(ln)
+        fig.canvas.blit(fig.bbox)
 
-        self.ax.plot(t, s)
+        for j in range(200):
+            fig.canvas.restore_region(bg)
+            ln.set_ydata(np.sin(ps1 + (j / 250) * np.pi))
+            self.ax.draw(ln)
+            self.ax.draw_artist(ln)
+            fig.canvas.blit(fig.bbox)
+            fig.canvas.flush_events()
 
-        self.ax.set(xlabel='time (s)', ylabel='voltage (mV)',
-                    title='About as simple as it gets, folks')
-        self.ax.grid()
 
 class AppDemo(QWidget)      :
     def __init__(self):
@@ -33,4 +42,3 @@ app = QApplication(sys.argv)
 demo = AppDemo()
 demo.show()
 sys.exit(app.exec_())
-        

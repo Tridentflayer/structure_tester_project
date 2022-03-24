@@ -23,7 +23,7 @@ def graphtest():
     # before we continue on so that :
     #  a) we have the correctly sized and drawn background to grab
     #  b) we have a cached renderer so that ``ax.draw_artist`` works
-    # so we spin the event loop to let the backend process any pending operations
+    #  so we spin the event loop to let the backend process any pending operations
     plt.pause(0.1)
 
     # get copy of entire figure (everything inside fig.bbox) sans animated artist
@@ -40,7 +40,7 @@ def graphtest():
         # update the artist, neither the canvas state nor the screen have changed
         ln.set_ydata(np.sin(ps1 + (j / 100) * np.pi))
 
-    # re-render the artist, updating the canvas state, but not the screen
+        # re-render the artist, updating the canvas state, but not the screen
         ax.draw_artist(ln)
         # copy the image to the GUI state, but screen might not be changed yet
         fig.canvas.blit(fig.bbox)
