@@ -1,3 +1,4 @@
+# This aint it chief
 import sys
 import numpy as np
 import matplotlib.pyplot as plt
@@ -119,7 +120,7 @@ class Canvas(FigureCanvas):
         ani = animation.FuncAnimation(fig, run, datagen, interval=1, init_func=init)
 
         # show graph, absolutely necessary
-        plt.show()
+        plt.show(block=True)
 
 
 class AppDemo(QWidget)      :

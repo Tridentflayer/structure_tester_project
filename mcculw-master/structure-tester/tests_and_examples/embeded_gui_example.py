@@ -6,7 +6,7 @@ from PyQt5.QtWidgets import QApplication, QWidget
 
 class Canvas(FigureCanvas):
     def __init__(self, parent):
-        fig, self.ax = plt.subplots(figsize=(5, 4), dpi=200)
+        fig, self.ax = plt.subplots(figsize=(5, 4), dpi=100)
         super().__init__(fig)
         self.setParent(parent)
 
