@@ -2,18 +2,16 @@ from mcculw import ul
 from mcculw.enums import DigitalIODirection as Diod
 from mcculw.enums import DigitalPortType as Dpt
 from mcculw.enums import ULRange
+from mcculw.enums import AnalogInputMode
 import time
 import tkinter as tk
 # Import libraries
 
-# Configure the A set of ports on DIO Board (0-7) as inputs
 ul.d_config_port(0, Dpt.FIRSTPORTA, Diod.IN)
-
-# Configure the B set of ports on DIO Board (8-15) as outputs
 ul.d_config_port(0, Dpt.FIRSTPORTB, Diod.OUT)
-
-# Configure DIO Ports on A/D Converter. Set as Outputs
-ul.d_config_port(1, Dpt.AUXPORT, Diod.OUT)
+ul.d_config_port(0, Dpt.FIRSTPORTC, Diod.IN)
+ul.d_config_port(1, Dpt.AUXPORT, Diod.OUT)              # Configure ports and analog inputs to Single Ended
+ul.a_input_mode(1, AnalogInputMode.SINGLE_ENDED)
 
 ManualLock = 1  # Create variable to toggle manual control. Lock is true by default
 
@@ -23,12 +21,12 @@ ManualLock = 1  # Create variable to toggle manual control. Lock is true by defa
 def cylinderbleed():    # need to fix this stupid thing :(
 
     for ventcontroller in range(5, 0, -1):  # Cycle controller 5-0
-        ul.d_bit_out(0, Dpt.FIRSTPORTA, 8, 0)
-        ul.d_bit_out(0, Dpt.FIRSTPORTA, 9, 0)      # During this, send a signal to open the vent cylinders
+        ul.d_bit_out(0, Dpt.FIRSTPORTA, 32, 0)
+        ul.d_bit_out(0, Dpt.FIRSTPORTA, 33, 0)      # During this, send a signal to open the vent cylinders
         time.sleep(.5)                  # Wait so the air has time to escape
         if ventcontroller == 1:
-            ul.d_bit_out(0, Dpt.FIRSTPORTA, 10, 1)   # At 1, power the cylinders, so they're shut, and break the loop
-            ul.d_bit_out(0, Dpt.FIRSTPORTA, 11, 1)
+            ul.d_bit_out(0, Dpt.FIRSTPORTA, 32, 1)   # At 1, power the cylinders, so they're shut, and break the loop
+            ul.d_bit_out(0, Dpt.FIRSTPORTA, 33, 1)
             break
     return ventcontroller               # Send the variable out
 
@@ -54,7 +52,7 @@ def pressuresensortest():
 
     pressuresensor = ul.a_in(1, 0, ULRange.BIP10VOLTS)  # Read pin to get analog value.
 
-    if pressuresensor == 2047:       # If the sensor reads zero volts, there is likely an error. Set to error state.
+    if pressuresensor == 33934:       # If the sensor reads zero volts, there is likely an error. Set to error state.
         pressuresensorstatus = 1
 
     else:
