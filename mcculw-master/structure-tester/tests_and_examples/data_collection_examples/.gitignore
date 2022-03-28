@@ -1,6 +1,0 @@
-# ignore compiled python files
-*.py[cdo]
-*.so
-dist
-build
-RELEASE-VERSION

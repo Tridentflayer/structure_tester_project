@@ -63,7 +63,7 @@ def run_example():
     a_input_mode(board_num, AnalogInputMode.SINGLE_ENDED)
 
     try:
-        # Start the scan
+         # Start the scan
         ul.a_in_scan(
             board_num, low_chan, high_chan, total_count,
             rate, ULRange.BIP10VOLTS, memhandle, scan_options)

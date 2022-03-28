@@ -73,3 +73,24 @@ def run_example():
 
     # Sets the board to be single ended analog input
     a_input_mode(board_num, AnalogInputMode.SINGLE_ENDED)
+
+    # The data collection code
+    try:
+        ul.a_in_scan(
+            board_num, low_chan, high_chan, total_count,
+            rate, ULRange.BIP10VOLTS, memhandle, scan_options)
+        last = 0
+        diff = 0
+        ul.stop_background(board_num, FunctionType.AIFUNCTION)
+
+
+    except ULError as e:
+        util.print_ul_error(e)
+
+    finally:
+        # Free the buffer in a finally block to prevent errors from causing
+        # a memory leak.
+        ul.win_buf_free(memhandle)
+
+    if use_device_detection:
+        ul.release_daq_device(board_num)
