@@ -7,9 +7,9 @@ import time
 import tkinter as tk
 # Import libraries
 
-ul.d_config_port(0, Dpt.FIRSTPORTA, Diod.IN)
-ul.d_config_port(0, Dpt.FIRSTPORTB, Diod.OUT)
-ul.d_config_port(0, Dpt.FIRSTPORTC, Diod.IN)
+ul.d_config_port(0, Dpt.FIRSTPORTA, Diod.IN)   # 12-20
+ul.d_config_port(0, Dpt.FIRSTPORTB, Diod.OUT)  # 2-10
+ul.d_config_port(0, Dpt.FIRSTPORTC, Diod.IN)   # 32-40
 ul.d_config_port(1, Dpt.AUXPORT, Diod.OUT)              # Configure ports and analog inputs to Single Ended
 ul.a_input_mode(1, AnalogInputMode.SINGLE_ENDED)
 
