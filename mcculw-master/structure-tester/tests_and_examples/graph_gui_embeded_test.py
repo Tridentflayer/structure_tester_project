@@ -1,13 +1,3 @@
-###################################################################
-#                                                                 #
-#                     PLOTTING A LIVE GRAPH                       #
-#                  ----------------------------                   #
-#            EMBED A MATPLOTLIB ANIMATION INSIDE YOUR             #
-#            OWN GUI!                                             #
-#                                                                 #
-###################################################################
-
-
 import sys
 from PyQt5 import QtCore, QtGui, QtWidgets
 import numpy as np
@@ -75,37 +65,31 @@ class CustomFigCanvas(FigureCanvas, TimedAnimation):
         self.addedData = []
         print('Matplotlib Version:', matplotlib.__version__)
         '''Matplot Graph Code'''
-        # The data
-        self.xlim = 200
-        self.n = np.linspace(0, self.xlim - 1, self.xlim)
-        a = []
-        b = []
-        a.append(2.0)
-        a.append(4.0)
-        a.append(2.0)
-        b.append(4.0)
-        b.append(3.0)
-        b.append(4.0)
-        self.y = (self.n * 0.0) + 50
 
-        # The window
         self.fig = Figure(figsize=(5, 5), dpi=100)
         self.ax1 = self.fig.add_subplot(111)
+        self.xlim = 200
 
-        # self.ax1 settings
-        self.ax1.set_xlabel('time')
-        self.ax1.set_ylabel('raw data')
+        # The data
+        self.n = np.linspace(0, self.xlim - 1, self.xlim)
+        self.y = (self.n * 0.0) + 50
+
+        # Line 1
         self.line1 = Line2D([], [], color='blue')
         self.line1_tail = Line2D([], [], color='red', linewidth=2)
         self.line1_head = Line2D([], [], color='red', marker='o', markeredgecolor='r')
         self.ax1.add_line(self.line1)
         self.ax1.add_line(self.line1_tail)
         self.ax1.add_line(self.line1_head)
+
+        # settings
+        self.ax1.set_xlabel('time')
+        self.ax1.set_ylabel('raw data')
         self.ax1.set_xlim(0, self.xlim - 1)
         self.ax1.set_ylim(0, 100)
         '''Matplot Graph Code'''
         FigureCanvas.__init__(self, self.fig)
-        TimedAnimation.__init__(self, self.fig, interval=25, blit=True)
+        TimedAnimation.__init__(self, self.fig, interval=1, blit=True)
 
     def new_frame_seq(self):
         return iter(range(self.n.size))
