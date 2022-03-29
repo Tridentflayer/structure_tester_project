@@ -1,195 +1,183 @@
-from __future__ import unicode_literals
-from PyQt5 import QtCore, QtGui
-import os
-import time
+###################################################################
+#                                                                 #
+#                     PLOTTING A LIVE GRAPH                       #
+#                  ----------------------------                   #
+#            EMBED A MATPLOTLIB ANIMATION INSIDE YOUR             #
+#            OWN GUI!                                             #
+#                                                                 #
+###################################################################
+
+
 import sys
-from threading import *
-import random
+from PyQt5 import QtCore, QtGui, QtWidgets
 import numpy as np
-import matplotlib.pyplot as plt
-
-from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg as FigureCanvas
-
-progname = os.path.basename(sys.argv[0])
-progversion = "0.1"
-
-try:
-    _fromUtf8 = QtCore.QString.fromUtf8
-except AttributeError:
-    def _fromUtf8(s):
-        return s
-
-try:
-    _encoding = QtGui.QApplication.UnicodeUTF8
-    def _translate(context, text, disambig):
-        return QtGui.QApplication.translate(context, text, disambig, _encoding)
-except AttributeError:
-    def _translate(context, text, disambig):
-        return QtGui.QApplication.translate(context, text, disambig)
-
-class Ui_MainWindow(object):
-    def setupUi(self, MainWindow):
-        MainWindow.setObjectName(_fromUtf8("MainWindow"))
-        MainWindow.resize(800, 600)
-        self.centralwidget = QtGui.QWidget(MainWindow)
-        self.centralwidget.setObjectName(_fromUtf8("centralwidget"))
-        self.gridLayout_3 = QtGui.QGridLayout(self.centralwidget)
-        self.gridLayout_3.setObjectName(_fromUtf8("gridLayout_3"))
-        self.PropaanEquivalent = QtGui.QLabel(self.centralwidget)
-        self.PropaanEquivalent.setObjectName(_fromUtf8("PropaanEquivalent"))
-        self.gridLayout_3.addWidget(self.PropaanEquivalent, 4, 3, 1, 1)
-        self.CH4 = QtGui.QLabel(self.centralwidget)
-        self.CH4.setObjectName(_fromUtf8("CH4"))
-        self.gridLayout_3.addWidget(self.CH4, 2, 3, 1, 1)
-        self.CARI = QtGui.QLabel(self.centralwidget)
-        self.CARI.setObjectName(_fromUtf8("CARI"))
-        self.gridLayout_3.addWidget(self.CARI, 3, 0, 1, 1)
-        self.WobbeIndex = QtGui.QLabel(self.centralwidget)
-        self.WobbeIndex.setObjectName(_fromUtf8("WobbeIndex"))
-        self.gridLayout_3.addWidget(self.WobbeIndex, 2, 0, 1, 1)
-        self.WobbeIndexField = QtGui.QLineEdit(self.centralwidget)
-        self.WobbeIndexField.setObjectName(_fromUtf8("WobbeIndexField"))
-        self.gridLayout_3.addWidget(self.WobbeIndexField, 2, 1, 1, 1)
-        self.pushButton = QtGui.QPushButton(self.centralwidget)
-        self.pushButton.setObjectName(_fromUtf8("pushButton"))
-        self.gridLayout_3.addWidget(self.pushButton, 1, 0, 1, 1)
-        self.pushButton.clicked.connect(self.timer)
-        self.CARI_Field = QtGui.QLineEdit(self.centralwidget)
-        self.CARI_Field.setObjectName(_fromUtf8("CARI_Field"))
-        self.gridLayout_3.addWidget(self.CARI_Field, 3, 1, 1, 1)
-        self.CH4_field = QtGui.QLineEdit(self.centralwidget)
-        self.CH4_field.setObjectName(_fromUtf8("CH4_field"))
-        self.gridLayout_3.addWidget(self.CH4_field, 2, 4, 1, 1)
-        self.Propaan_field = QtGui.QLineEdit(self.centralwidget)
-        self.Propaan_field.setObjectName(_fromUtf8("Propaan_field"))
-        self.gridLayout_3.addWidget(self.Propaan_field, 4, 4, 1, 1)
-        self.Dichtheid = QtGui.QLabel(self.centralwidget)
-        self.Dichtheid.setObjectName(_fromUtf8("Dichtheid"))
-        self.gridLayout_3.addWidget(self.Dichtheid, 3, 3, 1, 1)
-        self.Verbrandingswaarde = QtGui.QLabel(self.centralwidget)
-        self.Verbrandingswaarde.setObjectName(_fromUtf8("Verbrandingswaarde"))
-        self.gridLayout_3.addWidget(self.Verbrandingswaarde, 4, 0, 1, 1)
-        self.Verbrandingswaarde_field = QtGui.QLineEdit(self.centralwidget)
-        self.Verbrandingswaarde_field.setObjectName(_fromUtf8("Verbrandingswaarde_field"))
-        self.gridLayout_3.addWidget(self.Verbrandingswaarde_field, 4, 1, 1, 1)
-        self.Dichtheid_field = QtGui.QLineEdit(self.centralwidget)
-        self.Dichtheid_field.setObjectName(_fromUtf8("Dichtheid_field"))
-        self.gridLayout_3.addWidget(self.Dichtheid_field, 3, 4, 1, 1)
-        spacerItem = QtGui.QSpacerItem(20, 40, QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Expanding)
-        self.gridLayout_3.addItem(spacerItem, 5, 2, 1, 1)
-        self.result_field = QtGui.QLineEdit(self.centralwidget)
-        self.result_field.setObjectName(_fromUtf8("result_field"))
-        self.gridLayout_3.addWidget(self.result_field, 1, 1, 1, 1)
-        self.aantalSensoren_label = QtGui.QLabel(self.centralwidget)
-        self.aantalSensoren_label.setObjectName(_fromUtf8("aantalSensoren_label"))
-        self.gridLayout_3.addWidget(self.aantalSensoren_label, 1, 3, 1, 1)
-        self.aantalSensoren_field = QtGui.QLineEdit(self.centralwidget)
-        self.aantalSensoren_field.setObjectName(_fromUtf8("aantalSensoren_field"))
-        self.gridLayout_3.addWidget(self.aantalSensoren_field, 1, 4, 1, 1)
-        MainWindow.setCentralWidget(self.centralwidget)
-        self.menubar = QtGui.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 656, 21))
-        self.menubar.setObjectName(_fromUtf8("menubar"))
-        MainWindow.setMenuBar(self.menubar)
-        self.statusbar = QtGui.QStatusBar(MainWindow)
-        self.statusbar.setObjectName(_fromUtf8("statusbar"))
-        MainWindow.setStatusBar(self.statusbar)
-
-        self.dc = MyMplCanvas(MainWindow, width=1, height=2, dpi=100)
-        self.gridLayout_3.addWidget(self.dc, 5, 0, 1, 5)
-
-        self.retranslateUi(MainWindow)
-        QtCore.QMetaObject.connectSlotsByName(MainWindow)
-
-    def retranslateUi(self, MainWindow):
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow", None))
-        self.PropaanEquivalent.setText(_translate("MainWindow", "Propaan Equivalent:", None))
-        self.CH4.setText(_translate("MainWindow", "CH4:", None))
-        self.CARI.setText(_translate("MainWindow", "CARI:", None))
-        self.WobbeIndex.setText(_translate("MainWindow", "Wobbe Index:", None))
-        self.pushButton.setText(_translate("MainWindow", "Start", None))
-        self.Dichtheid.setText(_translate("MainWindow", "Dichtheid:", None))
-        self.Verbrandingswaarde.setText(_translate("MainWindow", "Verbrandingswaarde:", None))
-        self.aantalSensoren_label.setText(_translate("MainWindow", "aantal aangesloten sensoren:", None))
-
-    def closeEvent(self, event):
-        reply = QtGui.QMessageBox.question(self, 'Message',
-                                           "Are you sure to quit?", QtGui.QMessageBox.Yes |
-                                           QtGui.QMessageBox.No, QtGui.QMessageBox.No)
-
-        if reply == QtGui.QMessageBox.Yes:
-            event.accept()
-        else:
-            event.ignore()
-        self.fileQuit()
-
-    def task(self):
-        while True:
-            ui.dc.update_figure()
-            time.sleep(1.0)
-
-    def timer(self):
-        t = Timer(1.0, self.task())
-        t.start()
-
-def getCO22():
-    '''return the CO2 concentration in the atmosphere
-    '''
-    return 369.56 + random.random()*50
+from matplotlib.figure import Figure
+from matplotlib.animation import TimedAnimation
+from matplotlib.lines import Line2D
+from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
+import time
+import threading
+import matplotlib
+matplotlib.use("Qt5Agg")
 
 
-class MyMplCanvas(FigureCanvas):
-    """Ultimately, this is a QWidget (as well as a FigureCanvasAgg, etc.)."""
-    def __init__(self, parent=None, width=5, height=4, dpi=100):
-        self.fig = plt.figure(figsize=(width, height), dpi=dpi)
-        # self.fig = Figure(figsize=(width, height), dpi=dpi)
-        super(MyMplCanvas,self).__init__(self.fig)
-        self.yAxe = np.array([0])
-        self.xAxe = np.array([0])
-        self.i = 0
+def setCustomSize(x, width, height):
+    sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+    sizePolicy.setHorizontalStretch(0)
+    sizePolicy.setVerticalStretch(0)
+    sizePolicy.setHeightForWidth(x.sizePolicy().hasHeightForWidth())
+    x.setSizePolicy(sizePolicy)
+    x.setMaximumSize(QtCore.QSize(width, height))
 
-        self.axes = self.fig.add_subplot(111)
-        self.axes.autoscale(False)
-        #We want the axes cleared every time plot() is called
-        self.axes.hold(False)
-        self.axes.set_ylim(0, 500)
 
-        self.compute_initial_figure()
-        # plt.show(block=False)
+class CustomMainWindow(QtWidgets.QMainWindow):
+    def __init__(self):
+        super(CustomMainWindow, self).__init__()
 
+        # Define the geometry of the main window
+        self.setGeometry(300, 300, 800, 400)
+        self.setWindowTitle("my first window")
+
+        # Create FRAME_A
+        self.FRAME_A = QtWidgets.QFrame(self)
+        self.FRAME_A.setStyleSheet("QWidget { background-color: %s }" % QtGui.QColor(210, 210, 235, 255).name())
+        self.LAYOUT_A = QtWidgets.QGridLayout()
+        self.FRAME_A.setLayout(self.LAYOUT_A)
+        self.setCentralWidget(self.FRAME_A)
+
+        # Place the zoom button
+        self.zoomBtn = QtWidgets.QPushButton(text='zoom')
+        setCustomSize(self.zoomBtn, 100, 50)
+        self.zoomBtn.clicked.connect(self.zoomBtnAction)
+        self.LAYOUT_A.addWidget(self.zoomBtn, *(0, 0))
+
+        # Place the matplotlib figure
+        self.myFig = CustomFigCanvas()
+        self.LAYOUT_A.addWidget(self.myFig, *(0, 1))
+
+        # Add the callbackfunc to ..
+        myDataLoop = threading.Thread(name='myDataLoop', target=dataSendLoop, daemon=True, args=(self.addData_callbackFunc,))
+        myDataLoop.start()
+
+        self.show()
+
+    def zoomBtnAction(self):
+        print("zoom in")
+        self.myFig.zoomIn(5)
+
+    def addData_callbackFunc(self, value):
+        # print("Add data: " + str(value))
+        self.myFig.addData(value)
+
+
+class CustomFigCanvas(FigureCanvas, TimedAnimation):
+    def __init__(self):
+        self.addedData = []
+        print('Matplotlib Version:', matplotlib.__version__)
+        '''Matplot Graph Code'''
+        # The data
+        self.xlim = 200
+        self.n = np.linspace(0, self.xlim - 1, self.xlim)
+        a = []
+        b = []
+        a.append(2.0)
+        a.append(4.0)
+        a.append(2.0)
+        b.append(4.0)
+        b.append(3.0)
+        b.append(4.0)
+        self.y = (self.n * 0.0) + 50
+
+        # The window
+        self.fig = Figure(figsize=(5, 5), dpi=100)
+        self.ax1 = self.fig.add_subplot(111)
+
+        # self.ax1 settings
+        self.ax1.set_xlabel('time')
+        self.ax1.set_ylabel('raw data')
+        self.line1 = Line2D([], [], color='blue')
+        self.line1_tail = Line2D([], [], color='red', linewidth=2)
+        self.line1_head = Line2D([], [], color='red', marker='o', markeredgecolor='r')
+        self.ax1.add_line(self.line1)
+        self.ax1.add_line(self.line1_tail)
+        self.ax1.add_line(self.line1_head)
+        self.ax1.set_xlim(0, self.xlim - 1)
+        self.ax1.set_ylim(0, 100)
+        '''Matplot Graph Code'''
         FigureCanvas.__init__(self, self.fig)
-        self.setParent(parent)
+        TimedAnimation.__init__(self, self.fig, interval=25, blit=True)
 
-        FigureCanvas.setSizePolicy(self,
-                                   QtGui.QSizePolicy.Expanding,
-                                   QtGui.QSizePolicy.Expanding)
-        FigureCanvas.updateGeometry(self)
+    def new_frame_seq(self):
+        return iter(range(self.n.size))
 
-    def compute_initial_figure(self):
-        self.axes.plot([0, 1, 2, 3, 4, 5, 6, 7, 8, 9], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
+    def _init_draw(self):
+        lines = [self.line1, self.line1_tail, self.line1_head]
+        for l in lines:
+            l.set_data([], [])
 
-    def update_figure(self):
-        self.yAxe = np.append(self.yAxe, (getCO22()))
-        self.xAxe = np.append(self.xAxe, self.i)
-        print(self.xAxe, self.yAxe)
-        if len(self.yAxe) > 10:
-            self.yAxe = np.delete(self.yAxe, 0)
+    def addData(self, value):
+        self.addedData.append(value)
 
-        if len(self.xAxe) > 10:
-            self.xAxe = np.delete(self.xAxe, 0)
+    def zoomIn(self, value):
+        bottom = self.ax1.get_ylim()[0]
+        top = self.ax1.get_ylim()[1]
+        bottom += value
+        top -= value
+        self.ax1.set_ylim(bottom, top)
+        self.draw()
 
-        self.axes.plot(self.xAxe, self.yAxe)
-        self.axes.set_xlim(self.xAxe[0],self.xAxe[len(self.xAxe)-1])
-        self.axes.grid(True)
+    def _step(self, *args):
+        # Extends the _step() method for the TimedAnimation class.
+        try:
+            TimedAnimation._step(self, *args)
+        except Exception as e:
+            self.abc += 1
+            print(str(self.abc))
+            TimedAnimation._stop(self)
+            pass
 
-        self.i = self.i + 1
+    def _draw_frame(self, framedata):
+        margin = 2
+        while(len(self.addedData) > 0):
+            self.y = np.roll(self.y, -1)
+            self.y[-1] = self.addedData[0]
+            del(self.addedData[0])
 
-        self.fig.canvas.draw()
+        self.line1.set_data(self.n[0:self.n.size - margin], self.y[0:self.n.size - margin])
+        self.line1_tail.set_data(np.append(self.n[-10:-1 - margin], self.n[-1 - margin]), np.append(self.y[-10:-1 - margin], self.y[-1 - margin]))
+        self.line1_head.set_data(self.n[-1 - margin], self.y[-1 - margin])
+        self._drawn_artists = [self.line1, self.line1_tail, self.line1_head]
 
-# if  __name__ =='__main__':
-app = QtGui.QApplication(sys.argv)
-MainWindow = QtGui.QMainWindow()
-ui = Ui_MainWindow()
-ui.setupUi(MainWindow)
-MainWindow.show()
-sys.exit(app.exec_())
+
+# You need to setup a signal slot mechanism, to
+# send data to your GUI in a thread-safe way.
+# Believe me, if you don't do this right, things
+# go very very wrong..
+class Communicate(QtCore.QObject):
+    data_signal = QtCore.pyqtSignal(float)
+
+
+def dataSendLoop(addData_callbackFunc):
+    # Setup the signal-slot mechanism.
+    mySrc = Communicate()
+    mySrc.data_signal.connect(addData_callbackFunc)
+
+    # Simulate some data
+    n = np.linspace(0, 499, 500)
+    y = 50 + 25*(np.sin(n / 8.3)) + 10*(np.sin(n / 7.5)) - 5*(np.sin(n / 1.5))
+    i = 0
+
+    while(True):
+        if(i > 499):
+            i = 0
+        time.sleep(0.1)
+        mySrc.data_signal.emit(y[i])  # <- Here you emit a signal!
+        i += 1
+
+
+if __name__ == '__main__':
+    app = QtWidgets.QApplication(sys.argv)
+    QtWidgets.QApplication.setStyle(QtWidgets.QStyleFactory.create('Plastique'))
+    myGUI = CustomMainWindow()
+
+    sys.exit(app.exec_())
