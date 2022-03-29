@@ -21,12 +21,12 @@ ManualLock = 1  # Create variable to toggle manual control. Lock is true by defa
 def cylinderbleed():    # need to fix this stupid thing :(
 
     for ventcontroller in range(5, 0, -1):  # Cycle controller 5-0
-        ul.d_bit_out(0, Dpt.FIRSTPORTA, 32, 0)
-        ul.d_bit_out(0, Dpt.FIRSTPORTA, 33, 0)      # During this, send a signal to open the vent cylinders
+        ul.d_bit_out(0, Dpt.FIRSTPORTA, 8, 0)
+        ul.d_bit_out(0, Dpt.FIRSTPORTA, 9, 0)      # During this, send a signal to open the vent cylinders
         time.sleep(.5)                  # Wait so the air has time to escape
         if ventcontroller == 1:
-            ul.d_bit_out(0, Dpt.FIRSTPORTA, 32, 1)   # At 1, power the cylinders, so they're shut, and break the loop
-            ul.d_bit_out(0, Dpt.FIRSTPORTA, 33, 1)
+            ul.d_bit_out(0, Dpt.FIRSTPORTA, 8, 1)   # At 1, power the cylinders, so they're shut, and break the loop
+            ul.d_bit_out(0, Dpt.FIRSTPORTA, 9, 1)
             break
     return ventcontroller               # Send the variable out
 
@@ -52,18 +52,18 @@ def pressuresensortest():
 
     pressuresensor = ul.a_in(1, 0, ULRange.BIP10VOLTS)  # Read pin to get analog value.
 
-    if pressuresensor == 33934:       # If the sensor reads zero volts, there is likely an error. Set to error state.
+    if pressuresensor == 0:       # If the sensor reads zero volts, there is likely an error. Set to error state.
         pressuresensorstatus = 1
 
     else:
-        pressuresensorstatus = 0    # Otherwise, it's good.
+        pressuresensorstatus = 32768    # Otherwise, it's good.
         print(pressuresensor)
 
     return pressuresensorstatus  # Send pressuresensorstatus out of the function
 
 def distancesensortest():
 
-    distancesensor = ul.a_in(1, 0, ULRange.BIP10VOLTS)
+    distancesensor = ul.a_in(1, 8, ULRange.BIP10VOLTS)
 
     if distancesensor < 205 or distancesensor > 3072:  # Check if voltage is in operating range
         distancesensorstatus = 1
