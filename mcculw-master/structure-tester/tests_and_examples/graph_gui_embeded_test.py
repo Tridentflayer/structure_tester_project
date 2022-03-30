@@ -76,11 +76,8 @@ class CustomFigCanvas(FigureCanvas, TimedAnimation):
 
         # Line 1
         self.line1 = Line2D([], [], color='blue')
-        self.line1_tail = Line2D([], [], color='red', linewidth=2)
-        self.line1_head = Line2D([], [], color='red', marker='o', markeredgecolor='r')
         self.ax1.add_line(self.line1)
-        self.ax1.add_line(self.line1_tail)
-        self.ax1.add_line(self.line1_head)
+
 
         # settings
         self.ax1.set_xlabel('time')
@@ -95,7 +92,7 @@ class CustomFigCanvas(FigureCanvas, TimedAnimation):
         return iter(range(self.n.size))
 
     def _init_draw(self):
-        lines = [self.line1, self.line1_tail, self.line1_head]
+        lines = [self.line1]
         for l in lines:
             l.set_data([], [])
 
@@ -128,9 +125,7 @@ class CustomFigCanvas(FigureCanvas, TimedAnimation):
             del(self.addedData[0])
 
         self.line1.set_data(self.n[0:self.n.size - margin], self.y[0:self.n.size - margin])
-        self.line1_tail.set_data(np.append(self.n[-10:-1 - margin], self.n[-1 - margin]), np.append(self.y[-10:-1 - margin], self.y[-1 - margin]))
-        self.line1_head.set_data(self.n[-1 - margin], self.y[-1 - margin])
-        self._drawn_artists = [self.line1, self.line1_tail, self.line1_head]
+        self._drawn_artists = [self.line1]
 
 
 # You need to setup a signal slot mechanism, to
