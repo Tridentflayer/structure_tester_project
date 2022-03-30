@@ -52,11 +52,11 @@ def pressuresensortest():
 
     pressuresensor = ul.a_in(1, 0, ULRange.BIP10VOLTS)  # Read pin to get analog value.
 
-    if pressuresensor == 0:       # If the sensor reads zero volts, there is likely an error. Set to error state.
+    if pressuresensor == 32768:       # If the sensor reads zero volts, there is likely an error. Set to error state.
         pressuresensorstatus = 1
 
     else:
-        pressuresensorstatus = 32768    # Otherwise, it's good.
+        pressuresensorstatus = 1    # Otherwise, it's good.
         print(pressuresensor)
 
     return pressuresensorstatus  # Send pressuresensorstatus out of the function
