@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4cf8971e-8783-40c2-904e-6addb14c52e4" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/mcculw-master/structure-tester/Startup Programs/AIN Test.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mcculw-master/structure-tester/Startup Programs/Startup Prototype.py" beforeDir="false" afterPath="$PROJECT_DIR$/mcculw-master/structure-tester/Startup Programs/Startup Prototype.py" afterDir="false" />
     </list>
@@ -53,7 +52,7 @@
       <recent name="C:\Users\kmzada\Documents\GitHub\structure_tester\mcculw-master\structure-tester" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.AIN Test">
+  <component name="RunManager" selected="Python.Startup Prototype">
     <configuration name="AIN Test" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="structure_tester_project" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -190,8 +189,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.AIN Test" />
         <item itemvalue="Python.Startup Prototype" />
+        <item itemvalue="Python.AIN Test" />
         <item itemvalue="Python.Data Theft" />
         <item itemvalue="Python.DIO Test" />
         <item itemvalue="Python.Data Processing Test" />

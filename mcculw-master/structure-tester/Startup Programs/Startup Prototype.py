@@ -17,15 +17,14 @@ ManualLock = 1  # Create variable to toggle manual control. Lock is true by defa
 
 # Port numbers are completely random right now. Will need to change ports to match actual wiring.
 
-
-def cylinderbleed():    # need to fix this stupid thing :(
+def cylinderbleed():
 
     for ventcontroller in range(5, 0, -1):  # Cycle controller 5-0
         ul.d_bit_out(0, Dpt.FIRSTPORTA, 8, 0)
         ul.d_bit_out(0, Dpt.FIRSTPORTA, 9, 0)      # During this, send a signal to open the vent cylinders
-        time.sleep(.5)                  # Wait so the air has time to escape
+        time.sleep(.5)                             # Wait so the air has time to escape
         if ventcontroller == 1:
-            ul.d_bit_out(0, Dpt.FIRSTPORTA, 8, 1)   # At 1, power the cylinders, so they're shut, and break the loop
+            ul.d_bit_out(0, Dpt.FIRSTPORTA, 8, 1)  # At 1, power the cylinders, so they're shut, and break the loop
             ul.d_bit_out(0, Dpt.FIRSTPORTA, 9, 1)
             break
     return ventcontroller               # Send the variable out
@@ -45,21 +44,23 @@ def magsensortest():
         magsensorstatus = 1   # If anything else happens set an error
 
 
-    # return MagSensorData as value of the function
+    # return magsensorstatus as value of the function
     return magsensorstatus
 
 def pressuresensortest():
 
     pressuresensor = ul.a_in(1, 0, ULRange.BIP10VOLTS)  # Read pin to get analog value.
 
-    if pressuresensor == 32768:       # If the sensor reads zero volts, there is likely an error. Set to error state.
-        pressuresensorstatus = 1
+    if pressuresensor in range(32760, 32770):       # If the sensor reads zero volts, there is likely an error.
+        pressuresensorstatus = 1                    # 0 volts = ~32765
 
+    elif pressuresensor < 32760:                 # If it reads negative volts something's screwy. Need to Fix SE Range
+        pressuresensorstatus = 1
     else:
-        pressuresensorstatus = 1    # Otherwise, it's good.
+        pressuresensorstatus = 0    # Otherwise, it's good.
         print(pressuresensor)
 
-    return pressuresensorstatus  # Send pressuresensorstatus out of the function
+    return pressuresensorstatus
 
 def distancesensortest():
 
@@ -68,10 +69,10 @@ def distancesensortest():
     if distancesensor < 205 or distancesensor > 3072:  # Check if voltage is in operating range
         distancesensorstatus = 1
 
-    else:                            # Set value accordingly
+    else:
         distancesensorstatus = 0
 
-    return distancesensorstatus    # Send distancesensorstatus out
+    return distancesensorstatus
 
 def lightbarcheck():
     lightbarstatus = 1  # Once we get the light we'll figure out how to do this
@@ -84,8 +85,11 @@ DistanceSensorStatus = (distancesensortest())
 CylinderBleedStatus = (cylinderbleed())
 LightBarStatus = (lightbarcheck())
 
-if MagSensorStatus == 1 or PressureSensorStatus == 1 or DistanceSensorStatus == 1 or CylinderBleedStatus != 1 or LightBarStatus == 1:
+if MagSensorStatus == 1 or PressureSensorStatus == 1 or DistanceSensorStatus == 1:
     ErrorState = 1  # Check for error state
+
+elif CylinderBleedStatus != 1 or LightBarStatus == 1:
+    ErrorState = 1       # Cont. error state check
 else:
     ErrorState = 0
 
