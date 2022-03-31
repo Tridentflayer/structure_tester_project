@@ -7,8 +7,8 @@ import time
 import tkinter as tk
 # Import libraries
 
-ul.d_config_port(0, Dpt.FIRSTPORTA, Diod.IN)   # 12-20
-ul.d_config_port(0, Dpt.FIRSTPORTB, Diod.OUT)  # 2-10
+ul.d_config_port(0, Dpt.FIRSTPORTA, Diod.IN)   # 0-7
+ul.d_config_port(0, Dpt.FIRSTPORTB, Diod.OUT)  # 8-15
 ul.d_config_port(0, Dpt.FIRSTPORTC, Diod.IN)   # 32-40
 ul.d_config_port(1, Dpt.AUXPORT, Diod.OUT)              # Configure ports and analog inputs to Single Ended
 ul.a_input_mode(1, AnalogInputMode.SINGLE_ENDED)
@@ -17,10 +17,11 @@ ManualLock = 1  # Create variable to toggle manual control. Lock is true by defa
 
 # Port numbers are completely random right now. Will need to change ports to match actual wiring.
 
-def cylinderbleed():
 
+def cylinderbleed():
+    ventcontroller = 5
     for ventcontroller in range(5, 0, -1):  # Cycle controller 5-0
-        ul.d_bit_out(0, Dpt.FIRSTPORTA, 8, 0)
+        ul.d_bit_out(0, Dpt.FIRSTPORTA, 8, 0)      # Ports 32/33
         ul.d_bit_out(0, Dpt.FIRSTPORTA, 9, 0)      # During this, send a signal to open the vent cylinders
         time.sleep(.5)                             # Wait so the air has time to escape
         if ventcontroller == 1:
@@ -28,6 +29,7 @@ def cylinderbleed():
             ul.d_bit_out(0, Dpt.FIRSTPORTA, 9, 1)
             break
     return ventcontroller               # Send the variable out
+
 
 def magsensortest():
 
@@ -47,10 +49,11 @@ def magsensortest():
     # return magsensorstatus as value of the function
     return magsensorstatus
 
+
 def pressuresensortest():
 
     pressuresensor = ul.a_in(1, 0, ULRange.BIP10VOLTS)  # Read pin to get analog value.
-
+                                                    # Channel 0, port 0
     if pressuresensor in range(32760, 32770):       # If the sensor reads zero volts, there is likely an error.
         pressuresensorstatus = 1                    # 0 volts = ~32765
 
@@ -58,25 +61,28 @@ def pressuresensortest():
         pressuresensorstatus = 1
     else:
         pressuresensorstatus = 0    # Otherwise, it's good.
-        print(pressuresensor)
 
     return pressuresensorstatus
 
+
 def distancesensortest():
 
-    distancesensor = ul.a_in(1, 8, ULRange.BIP10VOLTS)
+    distancesensor = ul.a_in(1, 8, ULRange.BIP10VOLTS)  # channel 8, port 1
+    distancesensorstatus = 1
 
-    if distancesensor < 205 or distancesensor > 3072:  # Check if voltage is in operating range
+    if distancesensor < 33958 or distancesensor > 41952:  # Check if voltage is in operating range (.5v - 2.8v)
         distancesensorstatus = 1
 
-    else:
+    elif 33958 > distancesensor or distancesensor < 41952:
         distancesensorstatus = 0
 
     return distancesensorstatus
 
+
 def lightbarcheck():
     lightbarstatus = 1  # Once we get the light we'll figure out how to do this
     return lightbarstatus
+
 
 # Split data from functions into usable components
 MagSensorStatus = (magsensortest())
@@ -85,13 +91,14 @@ DistanceSensorStatus = (distancesensortest())
 CylinderBleedStatus = (cylinderbleed())
 LightBarStatus = (lightbarcheck())
 
+
 if MagSensorStatus == 1 or PressureSensorStatus == 1 or DistanceSensorStatus == 1:
     ErrorState = 1  # Check for error state
-
 elif CylinderBleedStatus != 1 or LightBarStatus == 1:
     ErrorState = 1       # Cont. error state check
 else:
     ErrorState = 0
+
 
 # data printout time :)
 window = tk.Tk()
