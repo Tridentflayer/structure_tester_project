@@ -13,7 +13,7 @@ import sys
 fig, ax = plt.subplots()
 ax.grid()
 
-# creates time
+# Creates time, thanks Yukiteru
 t = []
 
 # sets time as xdata
@@ -25,7 +25,7 @@ ydataps2 = []
 ydataps3 = []
 ydataps4 = []
 ydatads1 = []
-
+ydatas = [ydatads1, ydataps2, ydataps3, ydataps4, ydatads1]
 # generates data for the graph
 def datagen():
     # creates timer on the x-axis
@@ -47,6 +47,7 @@ lineps2, = ax.plot(t, [], lw=2)
 lineps3, = ax.plot(t, [], lw=2)
 lineps4, = ax.plot(t, [], lw=2)
 lineds1, = ax.plot(t, [], lw=2)
+lines = [lineps1, lineps2, lineps3, lineps4, lineds1]
 
 # init function, clears line data and sets the line data to be t and y[]
 def init():
@@ -72,7 +73,7 @@ def init():
 
 # updates values for data
 def run(data):
-    # time (t) and y = data
+    # time (t) and y = data (data is now a list)
     t, yps1, yps2, yps3, yps4, yds1 = data
     # update x to be set to time
     xdata.append(t)
@@ -118,4 +119,3 @@ ani = animation.FuncAnimation(fig, run, datagen, interval=1, init_func=init)
 
 # show graph, absolutely necessary
 plt.show()
-

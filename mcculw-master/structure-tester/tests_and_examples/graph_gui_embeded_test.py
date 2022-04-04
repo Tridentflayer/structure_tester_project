@@ -21,6 +21,7 @@ def setCustomSize(x, width, height):
 
 
 class CustomMainWindow(QtWidgets.QMainWindow):
+    # Runs on initialization
     def __init__(self):
         super(CustomMainWindow, self).__init__()
 
@@ -35,32 +36,28 @@ class CustomMainWindow(QtWidgets.QMainWindow):
         self.FRAME_A.setLayout(self.LAYOUT_A)
         self.setCentralWidget(self.FRAME_A)
 
-        # Place the zoom button
-        self.zoomBtn = QtWidgets.QPushButton(text='zoom')
-        setCustomSize(self.zoomBtn, 100, 50)
-        self.zoomBtn.clicked.connect(self.zoomBtnAction)
-        self.LAYOUT_A.addWidget(self.zoomBtn, *(0, 0))
-
         # Place the matplotlib figure
         self.myFig = CustomFigCanvas()
         self.LAYOUT_A.addWidget(self.myFig, *(0, 1))
 
-        # Add the callbackfunc to ..
+
+        # Start a thread processing dataSendLoop adding in addData_callbackFunc
+        # The thread is a daemon which means if you end it early, the thread doesn't finish and also ends
         myDataLoop = threading.Thread(name='myDataLoop', target=dataSendLoop, daemon=True, args=(self.addData_callbackFunc,))
         myDataLoop.start()
 
+        # Show the canvas
         self.show()
 
-    def zoomBtnAction(self):
-        print("zoom in")
-        self.myFig.zoomIn(5)
 
+        # Still trying to figure out what this does
     def addData_callbackFunc(self, value):
         # print("Add data: " + str(value))
         self.myFig.addData(value)
 
 
 class CustomFigCanvas(FigureCanvas, TimedAnimation):
+    # Runs of initialization
     def __init__(self):
         self.addedData = []
         print('Matplotlib Version:', matplotlib.__version__)
@@ -72,7 +69,7 @@ class CustomFigCanvas(FigureCanvas, TimedAnimation):
 
         # The data
         self.n = np.linspace(0, self.xlim - 1, self.xlim)
-        self.y = (self.n * 0.0) + 50
+        self.y = (self.n * 0.0) + 0
 
         # Line 1
         self.line1 = Line2D([], [], color='blue')
@@ -87,7 +84,7 @@ class CustomFigCanvas(FigureCanvas, TimedAnimation):
         '''Matplot Graph Code'''
         FigureCanvas.__init__(self, self.fig)
         TimedAnimation.__init__(self, self.fig, interval=1, blit=True)
-
+        # End of init code
     def new_frame_seq(self):
         return iter(range(self.n.size))
 
@@ -98,14 +95,6 @@ class CustomFigCanvas(FigureCanvas, TimedAnimation):
 
     def addData(self, value):
         self.addedData.append(value)
-
-    def zoomIn(self, value):
-        bottom = self.ax1.get_ylim()[0]
-        top = self.ax1.get_ylim()[1]
-        bottom += value
-        top -= value
-        self.ax1.set_ylim(bottom, top)
-        self.draw()
 
     def _step(self, *args):
         # Extends the _step() method for the TimedAnimation class.
