@@ -8,6 +8,7 @@ from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 import time
 import threading
 import matplotlib
+import itertools as itrt
 matplotlib.use("Qt5Agg")
 
 # Don't touch me here
@@ -71,7 +72,7 @@ class CustomFigCanvas(FigureCanvas, TimedAnimation):
         self.n = np.linspace(0, self.xlim - 1, self.xlim)
         self.y = (self.n * 0.0) + 0
 
-        # Line 1
+        # Add lines here
         self.line1 = Line2D([], [])
         self.ax1.add_line(self.line1)
 
@@ -136,9 +137,16 @@ def dataSendLoop(addData_callbackFunc):
     mySrc = Communicate()
     mySrc.data_signal.connect(addData_callbackFunc)
 
+    t = []
     # Simulate some data
-    n = np.linspace(0, 499, 500)
-    y = 50 + 25*(np.sin(n / 8.3)) + 10*(np.sin(n / 7.5)) - 5*(np.sin(n / 1.5))
+
+    #dis shit broken
+    for cnt in itrt.count():
+        t = cnt / 10
+        y = 5 + np.log(np.pi * t)
+        yield y
+
+
 
 
    # Creates infinite loop to emit signal

@@ -50,7 +50,7 @@
       <recent name="C:\Users\kmzada\Documents\GitHub\structure_tester\mcculw-master\structure-tester" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.graph_gui_embeded_test (1)">
+  <component name="RunManager" selected="Python.gui">
     <configuration name="data_collection_example" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="structure_tester_project" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -187,8 +187,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.graph_gui_embeded_test (1)" />
         <item itemvalue="Python.gui" />
+        <item itemvalue="Python.graph_gui_embeded_test (1)" />
         <item itemvalue="Python.data_collection_example" />
         <item itemvalue="Python.threading_test (1)" />
         <item itemvalue="Python.logging_test" />
