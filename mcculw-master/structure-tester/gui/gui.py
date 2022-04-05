@@ -11,6 +11,8 @@ import matplotlib
 import itertools as itrt
 matplotlib.use("Qt5Agg")
 
+t = []
+
 # Don't touch me here
 def setCustomSize(x, width, height):
     sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
@@ -137,26 +139,20 @@ def dataSendLoop(addData_callbackFunc):
     mySrc = Communicate()
     mySrc.data_signal.connect(addData_callbackFunc)
 
-    t = []
-    # Simulate some data
-
-    #dis shit broken
-    for cnt in itrt.count():
-        t = cnt / 10
-        y = 5 + np.log(np.pi * t)
-        yield y
-
-
+    def dataSimulation():
+        # Simulate some data
+        # dis shit broken
+        # shits fucked
+        for cnt in itrt.count():
+            t = cnt / 10
+            y = 5 + np.log(np.pi * t)
+            yield y, t
 
 
    # Creates infinite loop to emit signal
-    i = 0
     while(True):
-        if(i > 499):
-            i = 0
         time.sleep(0.1)
-        mySrc.data_signal.emit(y[i])  # <- Here you emit a signal!
-        i += 1
+        mySrc.data_signal.emit(y)  # <- Here you emit a signal!
 
 
 if __name__ == '__main__':
