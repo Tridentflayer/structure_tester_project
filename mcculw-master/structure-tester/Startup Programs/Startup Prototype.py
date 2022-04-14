@@ -33,18 +33,14 @@ def cylinderbleed():
 
 def magsensortest():
 
-    magsensortop = ul.d_bit_in(0, Dpt.FIRSTPORTA, 0)
+    magsensortop = ul.d_bit_in(0, Dpt.FIRSTPORTA, 2)  # (22, 23)
     magsensorbottom = ul.d_bit_in(0, Dpt.FIRSTPORTA, 1)  # Read True/False from port, set as variable
 
     if magsensortop == magsensorbottom:
         magsensorstatus = 1  # When the cylinder is at the bottom, and the sensors are equal, there must be an error
 
-    elif magsensortop != magsensorbottom:
-        magsensorstatus = 0  # Otherwise, set it as good
-
     else:
-        magsensorstatus = 1   # If anything else happens set an error
-
+        magsensorstatus = 0  # Otherwise, set it as good
 
     # return magsensorstatus as value of the function
     return magsensorstatus
@@ -119,7 +115,7 @@ else:
 
 if MagSensorStatus == 0:
     label_b = tk.Label(master=frame_b, text="Magnetic Sensor Check Passed!")
-    label_a.pack()
+    label_b.pack()
 else:
     label_b = tk.Label(master=frame_b, text="Magnetic Sensor Check Failed!")
     label_b.pack()
