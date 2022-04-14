@@ -39,8 +39,11 @@ def magsensortest():
     if magsensortop == magsensorbottom:
         magsensorstatus = 1  # When the cylinder is at the bottom, and the sensors are equal, there must be an error
 
+    elif magsensortop == 1 and magsensorbottom == 0:  # Can't be at the top after bleed
+        magsensorstatus = 1
+
     else:
-        magsensorstatus = 0  # Otherwise, set it as good
+        magsensorstatus = 0  # If they're not equal, and not at the top, it's correct
 
     # return magsensorstatus as value of the function
     return magsensorstatus
