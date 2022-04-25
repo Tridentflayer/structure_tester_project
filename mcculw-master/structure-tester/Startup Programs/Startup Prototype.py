@@ -33,7 +33,7 @@ def cylinderbleed():
 
 def magsensortest():
 
-    magsensortop = ul.d_bit_in(0, Dpt.FIRSTPORTA, 2)  # (22, 23)
+    magsensortop = ul.d_bit_in(0, Dpt.FIRSTPORTA, 2)  # (21, 22)
     magsensorbottom = ul.d_bit_in(0, Dpt.FIRSTPORTA, 1)  # Read True/False from port, set as variable
 
     if magsensortop == magsensorbottom:
@@ -60,6 +60,7 @@ def pressuresensortest():
         pressuresensorstatus = 1
     else:
         pressuresensorstatus = 0    # Otherwise, it's good.
+    print(pressuresensor)
 
     return pressuresensorstatus
 
@@ -79,7 +80,7 @@ def distancesensortest():
 
 
 def lightbarcheck():
-    lightbarstatus = 1  # Once we get the light we'll figure out how to do this
+    lightbarstatus = 0  # Once we get the light we'll figure out how to do this
     return lightbarstatus
 
 
