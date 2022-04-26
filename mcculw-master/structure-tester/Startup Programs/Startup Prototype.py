@@ -5,7 +5,6 @@ from mcculw.enums import ULRange
 from mcculw.enums import AnalogInputMode
 import time
 import tkinter as tk
-# Import libraries
 
 ul.d_config_port(0, Dpt.FIRSTPORTA, Diod.IN)   # 0-7
 ul.d_config_port(0, Dpt.FIRSTPORTB, Diod.OUT)  # 8-15
