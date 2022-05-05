@@ -135,7 +135,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="logging_test" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="test" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="structure_tester_project" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -143,11 +143,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/mcculw-master/structure-tester/tests_and_examples/threading_tests" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/mcculw-master/structure-tester/tests_and_examples" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/mcculw-master/structure-tester/tests_and_examples/threading_tests/logging_test.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/mcculw-master/structure-tester/tests_and_examples/test.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -179,19 +179,19 @@
     </configuration>
     <list>
       <item itemvalue="Python.graph" />
-      <item itemvalue="Python.graph_gui_embeded_test (1)" />
-      <item itemvalue="Python.logging_test" />
-      <item itemvalue="Python.threading_test (1)" />
       <item itemvalue="Python.data_collection_example" />
+      <item itemvalue="Python.graph_gui_embeded_test (1)" />
       <item itemvalue="Python.gui" />
+      <item itemvalue="Python.threading_test (1)" />
+      <item itemvalue="Python.test" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Python.gui" />
+        <item itemvalue="Python.test" />
         <item itemvalue="Python.graph_gui_embeded_test (1)" />
         <item itemvalue="Python.data_collection_example" />
         <item itemvalue="Python.threading_test (1)" />
-        <item itemvalue="Python.logging_test" />
       </list>
     </recent_temporary>
   </component>

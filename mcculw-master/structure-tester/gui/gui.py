@@ -11,7 +11,6 @@ import matplotlib
 import itertools as itrt
 matplotlib.use("Qt5Agg")
 
-t = []
 
 # Don't touch me here
 def setCustomSize(x, width, height):
@@ -46,7 +45,7 @@ class CustomMainWindow(QtWidgets.QMainWindow):
 
         # Start a thread processing dataSendLoop adding in addData_callbackFunc
         # The thread is a daemon which means if you end it early, the thread doesn't finish and also ends
-        myDataLoop = threading.Thread(name='myDataLoop', target=dataSendLoop, daemon=True, args=(self.addData_callbackFunc,))
+        myDataLoop = threading.Thread(name='myDataLoop', target=dataSendLoop, daemon=True, args=(self.addData_callbackFunc, tloop))
         myDataLoop.start()
 
         # Show the canvas
@@ -132,27 +131,35 @@ class CustomFigCanvas(FigureCanvas, TimedAnimation):
 class Communicate(QtCore.QObject):
     data_signal = QtCore.pyqtSignal(float)
 
+def timeLoop():
+    for cnt in itrt.count():
+        t = cnt / 10
+        # y value inputs
+        ps1y = np.log(np.pi * t)
+        ps2y = np.log(5 * np.pi * t)
+        ps3y = np.log(3 * np.pi * t)
+        ps4y = np.log(2 * np.pi * t)
+        ds1y = np.log(1.5 * np.pi * t)
 
-def dataSendLoop(addData_callbackFunc):
-    # Setup the signal-slot mechanism.
-    # Please don't touch this
-    mySrc = Communicate()
-    mySrc.data_signal.connect(addData_callbackFunc)
+        # yields data to move it to run function
+        yield t, ps1y, ps2y, ps3y, ps4y, ds1y
 
-    def dataSimulation():
-        # Simulate some data
-        # dis shit broken
-        # shits fucked
-        for cnt in itrt.count():
-            t = cnt / 10
-            y = 5 + np.log(np.pi * t)
-            yield y, t
+tloop = timeLoop()
+
+def dataSendLoop(addData_callbackFunc, data):
+        # Setup the signal-slot mechanism.
+        # Please don't touch this
+        mySrc = Communicate()
+        mySrc.data_signal.connect(addData_callbackFunc)
 
 
-   # Creates infinite loop to emit signal
-    while(True):
-        time.sleep(0.1)
-        mySrc.data_signal.emit(y)  # <- Here you emit a signal!
+       # Creates infinite loop to emit signal
+        while(True):
+            t, yps1, yps2, yps3, yps4, yds1 = next(data)
+            print(yps1)
+            time.sleep(0.1)
+            mySrc.data_signal.emit(yps1)  # <- Here you emit a signal!
+
 
 
 if __name__ == '__main__':
