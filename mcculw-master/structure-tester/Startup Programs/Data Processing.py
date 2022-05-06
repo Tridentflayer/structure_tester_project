@@ -30,20 +30,20 @@ while DataProcessing == 1:      # Loop for processing data while active
     LoadCellBRaw = ul.a_in(1, 10, ULRange.BIP10VOLTS)        # Channel 10, Port 8   Taking raw sensor data
     DistanceSensorRaw = ul.a_in(1, 3, ULRange.BIP10VOLTS)    # Channel 3, Port 10
 
-    LoadCell1Mid = int(LoadCell1Raw * 10.8 * 1000)
-    LoadCell2Mid = int(LoadCell2Raw * 12.6 * 1000)  # Multiplying the raw data by the constants
-    LoadCell3Mid = int(LoadCell3Raw * 12 * 1000)    # Gives us the actual forces/distances
-    LoadCellBMid = int(LoadCellBRaw * 113 * 1000)
-    DistanceSensorMid = int((DistanceSensorRaw**-1) * 10.52631579 * 1000)
+    LoadCell1Mid = int(LoadCell1Raw * 0.000305 * 10.8 * 100)
+    LoadCell2Mid = int(LoadCell2Raw * 0.000305 * 12.6 * 100)  # Multiplying the raw data by the constants
+    LoadCell3Mid = int(LoadCell3Raw * 0.000305 * 12 * 100)    # Gives us the actual forces/distances
+    LoadCellBMid = int(LoadCellBRaw * 0.000305 * 10.8 * 100)
+    DistanceSensorMid = int((DistanceSensorRaw**-1) * 10.52631579 * 100)
 
-    LoadCell1Final = str((float(LoadCell1Mid)/1000))
-    LoadCell2Final = str((float(LoadCell2Mid)/1000))
-    LoadCell3Final = str((float(LoadCell3Mid)/1000))
-    LoadCellBFinal = str((float(LoadCellBMid)/1000))
-    DistanceSensorFinal = str((float(DistanceSensorMid)/1000))
+    LoadCell1Final = str((float(LoadCell1Mid)/100))
+    LoadCell2Final = str((float(LoadCell2Mid)/100))
+    LoadCell3Final = str((float(LoadCell3Mid)/100))
+    LoadCellBFinal = str((float(LoadCellBMid)/100))
+    DistanceSensorFinal = str((float(DistanceSensorMid)/100))
 
-    L2 = [LoadCell1Final, "      ", LoadCell2Final, "      ", LoadCell3Final, "      ", LoadCellBFinal, "      "]
-    L3 = [DistanceSensorFinal]
+    L2 = [LoadCell1Final, "kg   /   ", LoadCell2Final, "kg   /   ", LoadCell3Final, "kg   /   "]
+    L3 = [LoadCellBFinal, "kg   /   ", DistanceSensorFinal]
     file.writelines(L2)         # Writing the data to the file
     file.writelines(L3)
     file.writelines("\n")
