@@ -63,10 +63,10 @@ while DataProcessing == 1:      # Loop for processing data while active
     LoadCellBRaw = (ul.a_in(1, 10, ULRange.BIP10VOLTS) - TareB)   # Channel 10, Port 8   Taking raw sensor data
     DistanceSensorRaw = ul.a_in(1, 3, ULRange.BIP10VOLTS)    # Channel 3, Port 10
 
-    LoadCell1Mid = int(LoadCell1Raw * 0.000305 * 10.8 * 100)
-    LoadCell2Mid = int(LoadCell2Raw * 0.000305 * 12.6 * 100)  # Multiplying the raw data by the constants
-    LoadCell3Mid = int(LoadCell3Raw * 0.000305 * 12 * 100)    # Gives us the actual forces/distances
-    LoadCellBMid = int(LoadCellBRaw * 0.000305 * 10.8 * 100)  # Need to change 10.8, 12.6, 12, and 10.8.
+    LoadCell1Mid = int(LoadCell1Raw * 0.000305 * 3 * 100)  # 1-10.8, 2-12.6, 3-12, B-10.8
+    LoadCell2Mid = int(LoadCell2Raw * 0.000305 * 3.5 * 100)  # Multiplying the raw data by the constants
+    LoadCell3Mid = int(LoadCell3Raw * 0.000305 * 3.33 * 100)    # Gives us the actual forces/distances
+    LoadCellBMid = int(LoadCellBRaw * 0.000305 * 3 * 100)  # Need to change 10.8, 12.6, 12, and 10.8.
     DistanceSensorMid = int((DistanceSensorRaw**-1) * 10.52631579 * 100)
 
     LoadCell1Final = str((float(LoadCell1Mid)/100))
