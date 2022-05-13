@@ -1,0 +1,11 @@
+Load Cell 1, Load Cell 2, Load Cell 3, Load Cell 4, Total Load, Distance Sensor
+
+2.82kg   /  2.17kg   /  2.24kg   /  2.47kg   /  ~9kg   /  0.0in
+-3.36kg   /  2.21kg   /  2.29kg   /  2.52kg   /  ~3kg   /  0.0in
+-3.35kg   /  2.2kg   /  2.29kg   /  2.52kg   /  ~3kg   /  0.0in
+-4.19kg   /  2.14kg   /  2.28kg   /  2.52kg   /  ~2kg   /  0.0in
+-3.37kg   /  2.2kg   /  2.29kg   /  2.5kg   /  ~3kg   /  0.0in
+-3.99kg   /  2.2kg   /  2.28kg   /  2.51kg   /  ~2kg   /  0.0in
+-4.19kg   /  2.17kg   /  2.24kg   /  2.52kg   /  ~2kg   /  0.0in
+-3.51kg   /  2.18kg   /  2.26kg   /  2.49kg   /  ~3kg   /  0.0in
+-4.1kg   /  2.18kg   /  2.26kg   /  2.47kg   /  ~2kg   /  0.0in

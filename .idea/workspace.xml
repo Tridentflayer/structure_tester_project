@@ -40,7 +40,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="ToolWindowDebug.ShowToolbar" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
   </component>
@@ -51,7 +51,7 @@
       <recent name="C:\Users\kmzada\Documents\GitHub\structure_tester\mcculw-master\structure-tester" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.Load Cell Test Program">
+  <component name="RunManager" selected="Python.Data Processing (1)">
     <configuration name="AIN Test" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="structure_tester_project" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -188,8 +188,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.Load Cell Test Program" />
         <item itemvalue="Python.Data Processing (1)" />
+        <item itemvalue="Python.Load Cell Test Program" />
         <item itemvalue="Python.Startup Program" />
         <item itemvalue="Python.AIN Test" />
         <item itemvalue="Python.Data Theft" />
