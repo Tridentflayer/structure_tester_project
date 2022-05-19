@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4cf8971e-8783-40c2-904e-6addb14c52e4" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mcculw-master/structure-tester/Startup Programs/13-05-2022-10-16-36.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/mcculw-master/structure-tester/Startup Programs/Data Processing.py" beforeDir="false" afterPath="$PROJECT_DIR$/mcculw-master/structure-tester/Startup Programs/Data Processing.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
