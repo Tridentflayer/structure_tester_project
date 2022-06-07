@@ -6,9 +6,9 @@ from mcculw.enums import AnalogInputMode
 import time
 import tkinter as tk
 
-ul.d_config_port(0, Dpt.FIRSTPORTA, Diod.IN)   # 0-7
-ul.d_config_port(0, Dpt.FIRSTPORTB, Diod.OUT)  # 8-15
-ul.d_config_port(0, Dpt.FIRSTPORTC, Diod.IN)   # 32-40
+ul.d_config_port(0, Dpt.FIRSTPORTA, Diod.IN)   # 1-9
+ul.d_config_port(0, Dpt.FIRSTPORTB, Diod.OUT)  # 32-40
+ul.d_config_port(0, Dpt.FIRSTPORTC, Diod.IN)   # 21-29
 ul.d_config_port(1, Dpt.AUXPORT, Diod.OUT)              # Configure ports and analog inputs to Single Ended
 ul.a_input_mode(1, AnalogInputMode.SINGLE_ENDED)
 
@@ -20,12 +20,12 @@ ManualLock = 1  # Create variable to toggle manual control. Lock is true by defa
 def cylinderbleed():
     ventcontroller = 5
     for ventcontroller in range(5, 0, -1):  # Cycle controller 5-0
-        ul.d_bit_out(0, Dpt.FIRSTPORTA, 8, 0)      # Ports 32/33
-        ul.d_bit_out(0, Dpt.FIRSTPORTA, 9, 0)      # During this, send a signal to open the vent cylinders
+        ul.d_bit_out(0, Dpt.FIRSTPORTA, 7, 0)      # Ports 32/33
+        ul.d_bit_out(0, Dpt.FIRSTPORTA, 8, 0)      # During this, send a signal to open the vent cylinders
         time.sleep(.5)                             # Wait so the air has time to escape
         if ventcontroller == 1:
-            ul.d_bit_out(0, Dpt.FIRSTPORTA, 8, 1)  # At 1, power the cylinders, so they're shut, and break the loop
-            ul.d_bit_out(0, Dpt.FIRSTPORTA, 9, 1)
+            ul.d_bit_out(0, Dpt.FIRSTPORTA, 7, 1)  # At 1, power the cylinders, so they're shut, and break the loop
+            ul.d_bit_out(0, Dpt.FIRSTPORTA, 8, 1)
             break
     return ventcontroller               # Send the variable out
 

@@ -54,7 +54,15 @@ TareB = TareBTotal/50
 DTare = DSTotal/50
 print(Tare1, Tare2, Tare3, TareB)
 DataProcessing = 1   # Then activate the recording section
+# StupidLoadcell1datafixer = 1
 print("Tare Found. Collecting data")
+
+# while StupidLoadcell1datafixer == 1:
+    # LoadCell1FixerRaw = (ul.a_in(1, 1, ULRange.BIP10VOLTS) - Tare1)
+    # LoadCell1FixerMid = int(LoadCell1FixerRaw * 0.000305 * 10.8 * 10)
+    # LoadCell1FixerFinal = (float(LoadCell1FixerMid)/100)
+    # Tare1 = Tare1 - LoadCell1FixerFinal
+    # StupidLoadcell1datafixer = StupidLoadcell1datafixer + 1
 
 while DataProcessing == 1:      # Loop for processing data while active
 
